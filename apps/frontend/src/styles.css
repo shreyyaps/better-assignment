@@ -1,0 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+}
+
+body {
+  font-family: 'Instrument Sans', sans-serif;
+}
+
+.container-wide {
+  max-width: 1200px;
+}
+
+.card {
+  @apply bg-slate-ink/80 border border-white/10 rounded-2xl shadow-xl;
+}
