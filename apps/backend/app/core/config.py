@@ -8,12 +8,15 @@ class Settings(BaseSettings):
         case_sensitive=False,
     )
 
-    database_url: str = "postgresql+psycopg2://postgres:postgres@localhost:5432/ai_email"
+    database_url: str = ""
     clerk_jwt_public_key: str = ""
+    clerk_jwks_url: str = ""
     gemini_api_key: str = ""
-    gmail_client_id: str = ""
-    gmail_client_secret: str = ""
-    gmail_redirect_uri: str = ""
+    gemini_model: str = "gemini-2.5-flash"
 
-    scheduler_timezone: str = "UTC"
-    scheduler_interval_minutes: int = 5
+    playwright_headed: bool = True
+    playwright_slow_mo_ms: int = 0
+    playwright_capture_step_screenshots: bool = False
+    playwright_capture_dom_snapshot: bool = True
+    playwright_default_timeout_ms: int = 3000
+    planner_max_attempts: int = 2
