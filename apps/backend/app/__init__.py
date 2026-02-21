@@ -1,9 +1,8 @@
 from flask import Flask
 
-from app.api.email_routes import email_bp
+from app.api.task_routes import task_bp
 from app.core.config import Settings
 from app.db.session import init_db
-from app.scheduler.email_scheduler import start_email_scheduler, stop_email_scheduler
 
 
 def create_app() -> Flask:
@@ -14,12 +13,13 @@ def create_app() -> Flask:
 
     init_db(settings.database_url)
 
-    app.register_blueprint(email_bp, url_prefix="/emails")
+    app.register_blueprint(task_bp, url_prefix="/tasks")
 
-    scheduler = start_email_scheduler(app)
-
-    @app.teardown_appcontext
-    def shutdown_scheduler(_exception: Exception | None) -> None:
-        stop_email_scheduler(scheduler)
+    @app.after_request
+    def add_cors_headers(response):  # type: ignore[override]
+        response.headers["Access-Control-Allow-Origin"] = "*"
+        response.headers["Access-Control-Allow-Headers"] = "Authorization, Content-Type"
+        response.headers["Access-Control-Allow-Methods"] = "GET, POST, PUT, PATCH, DELETE, OPTIONS"
+        return response
 
     return app

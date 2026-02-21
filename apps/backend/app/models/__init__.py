@@ -1,5 +1,4 @@
 from app.models.user import User
-from app.models.email import Email, ImportanceEnum
-from app.models.email_reply import EmailReply
+from app.models.task import Task
 
-__all__ = ["User", "Email", "EmailReply", "ImportanceEnum"]
+__all__ = ["User", "Task"]
